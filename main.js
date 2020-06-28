@@ -16,15 +16,16 @@ $(document).ready(function() {
       var dischi = data.response; // metto in una variabile la mia array di oggetti
       creaDischi(dischi); // chiamo la funzione che richiama l API per generare il contenuto
       //
-      $('button').click(function() {
-        filtroGenere(dischi);
-      })
-
     },
     error: function() {
       alert('errore');
     }
   })
+
+  $('#filtra-musica').change(function() {
+    filtroGenere(dischi);
+  })
+
 
   function creaDischi(dischi) {
     for (var i = 0; i < dischi.length; i++) {
@@ -48,7 +49,6 @@ $(document).ready(function() {
         var html = template(singoloCd);
         $('.cds-container').append(html);
       }
-
     }
   }
 
