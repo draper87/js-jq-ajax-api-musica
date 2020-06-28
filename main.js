@@ -23,7 +23,7 @@ $(document).ready(function() {
   })
 
   $('#filtra-musica').change(function() {
-    filtroGenere(dischi);
+    filtroGenere();
   })
 
 
@@ -37,19 +37,18 @@ $(document).ready(function() {
     }
   }
 
-  function filtroGenere(dischi) {
-    $('.cds-container').html('');
-    for (var i = 0; i < dischi.length; i++) {
-      var singoloCd = dischi[i]; // metto in una variabile il singolo oggetto della array
-      var genereMusicale = singoloCd.genre; // prendo il genere musicale dall api
-      var genereSceltoDaUtente = $('#filtra-musica').val(); // prendo il genere musicale scelto dall utente
-      if (genereMusicale === genereSceltoDaUtente) { // solo se il genere musicale scelto dall utente coincide con quello della canzone procedo con la visualizzazione del contenuto
-        var source = $('#cd-template').html();
-        var template = Handlebars.compile(source);
-        var html = template(singoloCd);
-        $('.cds-container').append(html);
+  function filtroGenere() {
+    $('.cds-container .cd').each(function() {
+      var genereSceltoDaUtente = $('#filtra-musica').val();
+      var genereMusicale = $(this).html();
+      if (genereMusicale.includes(genereSceltoDaUtente)) {
+        $(this).show();
       }
-    }
+      else {
+        $(this).hide();
+      }
+      console.log(genereMusicale);
+    })
   }
 
 });
