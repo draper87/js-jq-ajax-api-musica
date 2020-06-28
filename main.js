@@ -38,16 +38,20 @@ $(document).ready(function() {
   }
 
   function filtroGenere() {
-    $('.cds-container .cd').each(function() {
+    $('.cd').each(function() {
       var genereSceltoDaUtente = $('#filtra-musica').val();
-      var genereMusicale = $(this).html();
-      if (genereMusicale.includes(genereSceltoDaUtente)) {
+      var genereMusicale = $(this).find('.genre').attr('value');
+      if (genereSceltoDaUtente === 'all') {
         $(this).show();
       }
       else {
-        $(this).hide();
+        if (genereMusicale === genereSceltoDaUtente) {
+          $(this).show();
+        }
+        else {
+          $(this).hide();
+        }
       }
-      console.log(genereMusicale);
     })
   }
 
